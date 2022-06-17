@@ -195,6 +195,7 @@ class main:
 
 
 def save_tweet(etc=False):
+	
 	if etc == False:
 		tweets = api.home_timeline(count=10)
 	else:
@@ -281,11 +282,21 @@ def reply_tweet():
 		except:
 			pass
 
-
-
+# つぶやく
 if random.randint(1,16) == 16:
 	save_tweet()
 	main.train()
 	api.update_status(main.make())
-
+# トレンドをtsvへ追加
+elif random.randint(1,16) == 16:
+	trends = api.get_place_trends(23424856)# 日本のトレンド
+	for tr in trends:
+		for i in range(30):
+			try:
+				s = tr['trends'][i]['name']
+				s = re.sub('#', '', s)
+				save_tweet(etc=s)
+			except:
+				pass
+# リプライチェック
 reply_tweet()

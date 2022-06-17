@@ -278,7 +278,6 @@ def reply_tweet():
 			api.update_status(status=v, in_reply_to_status_id=k)
 			with open(d.docments+'noreply_id.txt','a') as f:
 				f.write(str(k)+'\n')
-			print('書き込みました。')
 		except:
 			pass
 
